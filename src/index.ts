@@ -15,7 +15,7 @@ const db = await open({
 })
 const app = express()
 app.set('view engine', 'ejs')
-app.use('/static', express.static('./public'))
+//app.use('/static', express.static('./public'))
 app.use(await img(db))
 app.use(user)
 app.use(admin)

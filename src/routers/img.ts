@@ -31,7 +31,7 @@ async function queryImg (id:number, req:Request, res:Response) {
         res.send('')
       }
     } else {
-      res.redirect(`/static/imgs/${id}.webp`)
+      res.redirect(`/images/memes/${id}.webp`)
     }
   } else {
     res.status(400)
