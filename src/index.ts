@@ -14,6 +14,7 @@ const db = await open({
   driver: sqlite3.Database
 })
 const app = express()
+app.set('view engine', 'ejs')
 app.use('/static', express.static('./public'))
 app.use(await img(db))
 app.use(user)
