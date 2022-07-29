@@ -10,7 +10,7 @@ import { open } from 'sqlite'
 const config = new Config('./config.json')
 consola.info(`Reading database ${config.dbpath}`)
 const db = await open({
-  filename: config.dbpath,
+  filename: './db.db',
   driver: sqlite3.Database
 })
 const app = express()
@@ -26,9 +26,9 @@ app.use(function (err:any, req:any, res:any, next:any) {
   consola.error(err)
   res.status(500).send('')
 })
-const server = app.listen(config.port, () => { consola.info(`Server started at http://0.0.0.0:${config.port}`) })
+const server = app.listen(18080, () => { consola.info('Server started at http://0.0.0.0:18080') })
 
-process.on('SIGTERM', () => {
+process.on('SIGINT', () => {
   server.close(async () => {
     consola.info('Shuting down')
     await db.close()
