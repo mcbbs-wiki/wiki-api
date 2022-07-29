@@ -4,6 +4,7 @@ import consola from 'consola'
 import { Config } from './config.js'
 import img from './routers/img.js'
 import user from './routers/user.js'
+import admin from './routers/admin.js'
 import { open } from 'sqlite'
 
 const config = new Config('./config.json')
@@ -16,6 +17,7 @@ const app = express()
 app.use('/static', express.static('./public'))
 app.use(await img(db))
 app.use(user)
+app.use(admin)
 app.all('*', function (req, res) {
   res.status(404).send('')
 })
