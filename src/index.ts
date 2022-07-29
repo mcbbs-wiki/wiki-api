@@ -14,7 +14,7 @@ const db = await open({
 })
 const app = express()
 app.use('/static', express.static('./public'))
-app.use(img(db))
+app.use(await img(db))
 app.use(user)
 app.all('*', function (req, res) {
   res.status(404).send('')
@@ -26,7 +26,9 @@ app.use(function (err:any, req:any, res:any, next:any) {
 const server = app.listen(config.port, () => { consola.info(`Server started at http://0.0.0.0:${config.port}`) })
 
 process.on('SIGTERM', () => {
-  server.close(() => {
-    console.log('Shuting down')
+  server.close(async () => {
+    consola.info('Shuting down')
+    await db.close()
+    consola.info('Closing database')
   })
 })
