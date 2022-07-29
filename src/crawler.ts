@@ -26,8 +26,8 @@ function rawHtml (html: string, uid: number): BBSUser {
     const group = getGroupInfo($)
     let groupText = $(`${mbnSelect} .xg1:contains("用户组")`).parent().text().split(/\s\s/)
     // console.log(group, groupText)
-    // console.log(groupText.splice(0, 1))
-    // console.log(groupText.splice(1, 1))
+    groupText.splice(0, 1)
+    groupText.splice(1, 1)
     // console.log(groupText)
     if (groupText[1] !== undefined) {
       const extraGroup = groupText[1].split(',')
