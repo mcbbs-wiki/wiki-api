@@ -20,6 +20,7 @@ routerImg.get('/imgs/:id', async (req, res) => {
   queryImg(req.params.id, req, res, false)
 })
 async function queryImg (id:string, req:Request, res:Response, random:boolean) {
+  res.header('Access-Control-Allow-Origin','*')
   const pid = parseInt(id)
   const preua = req.header('User-Agent')
   const ua = preua !== undefined ? preua : null

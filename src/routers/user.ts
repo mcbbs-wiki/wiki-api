@@ -6,13 +6,14 @@ const routerUser = express.Router()
 let db:Database
 const USAGE_SQL = 'INSERT INTO usage VALUES (NULL,"user",?,?,?,?,?,?)'
 routerUser.get('/users/:id', async (req, res) => {
+  res.header('Access-Control-Allow-Origin','*')
   const uid = parseInt(req.params.id)
   const preua = req.header('User-Agent')
   const ua = preua !== undefined ? preua : null
   // console.log(req.ip, ua, req.params.id.toString())
   if (isNumber(uid)) {
     res.header('Cache-Control', 'max-age=300')
-    res.header('Access-Control-Allow-Origin','*')
+    // res.header('Access-Control-Allow-Origin','*')
     const user = await getUser(uid)
     if (user) {
       // console.log(uid, req.ip, ua)
