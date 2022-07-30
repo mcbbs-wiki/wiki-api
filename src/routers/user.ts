@@ -12,6 +12,7 @@ routerUser.get('/users/:id', async (req, res) => {
   // console.log(req.ip, ua, req.params.id.toString())
   if (isNumber(uid)) {
     res.header('Cache-Control', 'max-age=300')
+    res.header('Access-Control-Allow-Origin','*')
     const user = await getUser(uid)
     if (user) {
       // console.log(uid, req.ip, ua)
