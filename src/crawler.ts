@@ -91,15 +91,15 @@ function nanTest (num: number): number {
 }
 function getcreditInfo (html: CheerioAPI): BBSCredit {
   return {
+    nugget: nanTest(parseInt(html(`${creditSelect} ul li:contains(金粒)`).text().trim().replace(/[金粒]/g, ''))),
+    gem: nanTest(parseInt(html(`${creditSelect} ul li:contains(宝石)`).text().trim().replace(/[宝石颗]/g, ''))),
     heart: nanTest(parseInt(html(`${creditSelect} ul li:contains(爱心)`).text().trim().replace(/[爱心]/g, ''))),
     contribute: nanTest(parseInt(html(`${creditSelect} ul li:contains(贡献)`).text().trim().replace(/[贡献份]/g, ''))),
     diamond: nanTest(parseInt(html(`${creditSelect} ul li:contains(钻石)`).text().trim().replace(/[钻石颗]/g, ''))),
     popularity: nanTest(parseInt(html(`${creditSelect} ul li:contains(人气)`).text().trim().replace(/[人气点]/g, ''))),
-    credit: nanTest(parseInt(html(`${creditSelect} ul li:contains(积分)`).text().trim().replace(/[积分]/g, ''))),
-    nugget: nanTest(parseInt(html(`${creditSelect} ul li:contains(金粒)`).text().trim().replace(/[金粒]/g, ''))),
-    gem: nanTest(parseInt(html(`${creditSelect} ul li:contains(宝石)`).text().trim().replace(/[宝石颗]/g, ''))),
     ingot: nanTest(parseInt(html(`${creditSelect} ul li:contains(金锭)`).text().trim().replace(/[金锭已弃用[\]块]/g, ''))),
-    star: nanTest(parseInt(html(`${creditSelect} ul li:contains(下界)`).text().trim().replace(/[下界之星枚]/g, '')))
+    star: nanTest(parseInt(html(`${creditSelect} ul li:contains(下界)`).text().trim().replace(/[下界之星枚]/g, ''))),
+    credit: nanTest(parseInt(html(`${creditSelect} ul li:contains(积分)`).text().trim().replace(/[积分]/g, '')))
   }
 }
 export async function getUser (user: number): Promise<BBSUser> {
