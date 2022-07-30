@@ -22,6 +22,5 @@ export interface BBSUser {
     uid: number,
     nickname: string | null,
     credits: BBSCredit,
-    activites: BBSActivities,
-    locked: boolean
+    activites: BBSActivities
 }

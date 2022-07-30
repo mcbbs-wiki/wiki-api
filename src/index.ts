@@ -18,7 +18,7 @@ const app = express()
 app.set('view engine', 'ejs')
 // app.use('/static', express.static('./public'))
 app.use(await img(db))
-app.use(user)
+app.use(user(db))
 app.use(admin)
 app.all('*', function (req, res) {
   res.status(404).send('')

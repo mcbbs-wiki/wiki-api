@@ -13,7 +13,7 @@ async function getUserPage (uid: number) {
     return ''
   }
 }
-function rawHtml (html: string, uid: number): BBSUser {
+function rawHtml (html: string, uid: number): BBSUser|null {
   const $ = load(html)
   if ($('#messagetext > p:nth-child(1)').html() == null) {
     // const creditinfo = load($('#psts').html() as string)
@@ -48,35 +48,10 @@ function rawHtml (html: string, uid: number): BBSUser {
         userGroupsText: groupText.concat(),
         currentGroup: group[0],
         currentGroupText: groupText[0]
-      },
-      locked: false
+      }
     }
   } else {
-    return {
-      uid,
-      nickname: null,
-      credits: {
-        heart: 0,
-        contribute: 0,
-        popularity: 0,
-        diamond: 0,
-        credit: 0,
-        nugget: 0,
-        gem: 0,
-        ingot: 0,
-        star: 0
-      },
-      activites: {
-        post: 0,
-        thread: 0,
-        digiest: 0,
-        currentGroup: null,
-        currentGroupText: null,
-        userGroups: null,
-        userGroupsText: null
-      },
-      locked: true
-    }
+    return null
   }
 }
 function getUserName (html: CheerioAPI): string {
@@ -102,7 +77,7 @@ function getcreditInfo (html: CheerioAPI): BBSCredit {
     credit: nanTest(parseInt(html(`${creditSelect} ul li:contains(积分)`).text().trim().replace(/[积分]/g, '')))
   }
 }
-export async function getUser (user: number): Promise<BBSUser> {
+export async function getUser (user: number): Promise<BBSUser|null> {
   return rawHtml(await getUserPage(user), user)
 }
 function calcDigiest (credits: BBSCredit, posts: number, threads: number): number {
