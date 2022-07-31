@@ -25,12 +25,11 @@ routerUser.get('/users/:id', async (req, res) => {
       res.send(user)
     } else {
       usage(uid, 404, req.ip, ua)
-      res.status(404).send('')
+      res.status(404).sendFile('../wwwroot/mcbbs.wiki/404.html')
     }
   } else {
-    usage(uid, 404, req.ip, ua)
-    res.status(400)
-    res.send('')
+    usage(uid, 400, req.ip, ua)
+    res.status(400).sendFile('../wwwroot/mcbbs.wiki/400.html')
   }
 })
 export default function (conn:Pool):Router {
