@@ -3,6 +3,7 @@ import isNumber from 'is-number'
 import randomInteger from 'random-int'
 import consola from 'consola'
 import { Pool, RowDataPacket } from 'mysql2/promise'
+import path from 'path'
 // import { inspect } from 'util'
 
 let db:Pool
@@ -38,7 +39,7 @@ async function queryImg (id:string, req:Request, res:Response, random:boolean) {
         res.send((img as RowDataPacket[])[0])
       } else {
         usage(random, pid, 404, req.ip, ua, 'json')
-        res.status(404).sendFile('../wwwroot/mcbbs.wiki/404.html')
+        res.status(404).sendFile(path.join(__dirname, '../wwwroot/mcbbs.wiki/404.html'))
       }
     } else {
       usage(random, pid, 200, req.ip, ua, null)
@@ -46,7 +47,7 @@ async function queryImg (id:string, req:Request, res:Response, random:boolean) {
     }
   } else {
     usage(random, pid, 400, req.ip, ua, null)
-    res.status(400).sendFile('../wwwroot/mcbbs.wiki/400.html')
+    res.status(400).sendFile(path.join(__dirname, '../wwwroot/mcbbs.wiki/400.html'))
   }
 }
 export default async function (conn:Pool):Promise<Router> {

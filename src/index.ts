@@ -4,6 +4,7 @@ import consola from 'consola'
 import { Config } from './config.js'
 import img from './routers/img.js'
 import user from './routers/user.js'
+import path from 'path'
 // import admin from './routers/admin.js'
 // import { open } from 'sqlite'
 import { createPool } from 'mysql2/promise'
@@ -27,11 +28,11 @@ app.get('/crash-test', (req, res) => {
   throw new Error('test')
 })
 app.all('*', (req, res) => {
-  res.status(404).sendFile('../wwwroot/mcbbs.wiki/404.html')
+  res.status(404).sendFile(path.join(__dirname, '../wwwroot/mcbbs.wiki/404.html'))
 })
 app.use((err:any, req:any, res:any, next:any) => {
   consola.error(err)
-  res.status(500).sendFile('../wwwroot/mcbbs.wiki/500.html')
+  res.status(500).sendFile(path.join(__dirname, '../wwwroot/mcbbs.wiki/500.html'))
 })
 const server = app.listen(config.port, () => { consola.info(`Server started at http://0.0.0.0:${config.port}`) })
 function shutdown (server:Server) {
