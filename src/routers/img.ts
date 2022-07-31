@@ -31,11 +31,12 @@ async function queryImg (id:string, req:Request, res:Response, random:boolean) {
   if (isNumber(id)) {
     // consola.log(id)
     if (typeJson) {
-      const [img] = await db.query(SQL, [pid])
-      if (img !== undefined) {
+      const [query] = await db.query(SQL, [pid])
+      const img = query as RowDataPacket[]
+      if (img.length !== 0) {
         usage(random, pid, 200, req.ip, ua, 'json')
         res.header('Cache-Control', 'no-store')
-        res.send((img as RowDataPacket[])[0])
+        res.send(img[0])
       } else {
         usage(random, pid, 404, req.ip, ua, 'json')
         res.status(404).sendFile('/www/wwwroot/mcbbs.wiki/404.html')
