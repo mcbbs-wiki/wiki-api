@@ -1,5 +1,4 @@
 import { statSync, writeFileSync, readFileSync } from 'fs'
-import consola from 'consola'
 
 export class Config {
   dbhost:string = 'localhost'
@@ -8,7 +7,7 @@ export class Config {
   db:string = 'KafuChino'
   port:number = 8080
   constructor (path:string) {
-    consola.info(`Reading config ${path}`)
+    console.info(`Reading config ${path}`)
     try {
       statSync(path)
       const obj = JSON.parse(readFileSync(path).toString())
@@ -19,7 +18,7 @@ export class Config {
       this.dbpass = obj.dbpass
     } catch {
       writeFileSync(path, JSON.stringify(this))
-      consola.info(`Creating new config ${path}`)
+      console.info(`Creating new config ${path}`)
     }
   }
 }

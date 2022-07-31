@@ -1,6 +1,5 @@
 import express from 'express'
 // import sqlite3 from 'sqlite3'
-import consola from 'consola'
 import { Config } from './config.js'
 import img from './routers/img.js'
 import user from './routers/user.js'
@@ -10,7 +9,7 @@ import { createPool } from 'mysql2/promise'
 import { Server } from 'http'
 
 const config = new Config('./config.json')
-consola.info(`Connecting database ${config.dbhost}`)
+console.info(`Connecting database ${config.dbhost}`)
 const db = await createPool({
   host: config.dbhost,
   user: config.dbuser,
@@ -30,15 +29,15 @@ app.all('*', (req, res) => {
   res.status(404).sendFile('/www/wwwroot/mcbbs.wiki/404.html')
 })
 app.use((err:any, req:any, res:any, next:any) => {
-  consola.error(err)
+  console.error(err)
   res.status(500).sendFile('/www/wwwroot/mcbbs.wiki/500.html')
 })
-const server = app.listen(config.port, () => { consola.info(`Server started at http://0.0.0.0:${config.port}`) })
+const server = app.listen(config.port, () => { console.info(`Server started at http://0.0.0.0:${config.port}`) })
 function shutdown (server:Server) {
   server.close(async () => {
-    consola.info('Shuting down')
+    console.info('Shuting down')
     await db.end()
-    consola.info('Closing database')
+    console.info('Closing database')
   })
 }
 
