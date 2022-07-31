@@ -2,7 +2,6 @@ import express, { Router } from 'express'
 import isNumber from 'is-number'
 import { Pool } from 'mysql2/promise'
 // import { Database } from 'sqlite'
-import path from 'path'
 import { getUser } from '../crawler.js'
 const routerUser = express.Router()
 let db:Pool
@@ -26,11 +25,11 @@ routerUser.get('/users/:id', async (req, res) => {
       res.send(user)
     } else {
       usage(uid, 404, req.ip, ua)
-      res.status(404).sendFile(path.join(__dirname, '../wwwroot/mcbbs.wiki/404.html'))
+      res.status(404).sendFile('/www/wwwroot/mcbbs.wiki/404.html')
     }
   } else {
     usage(uid, 400, req.ip, ua)
-    res.status(400).sendFile(path.join(__dirname, '../wwwroot/mcbbs.wiki/400.html'))
+    res.status(400).sendFile('/www/wwwroot/mcbbs.wiki/400.html')
   }
 })
 export default function (conn:Pool):Router {
