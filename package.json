@@ -4,10 +4,6 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "ts-node-dev --respawn src/index.ts"
-  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
