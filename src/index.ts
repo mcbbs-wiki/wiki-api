@@ -1,18 +1,21 @@
 import express from 'express'
-import sqlite3 from 'sqlite3'
+// import sqlite3 from 'sqlite3'
 import consola from 'consola'
 import { Config } from './config.js'
 import img from './routers/img.js'
 import user from './routers/user.js'
 import admin from './routers/admin.js'
-import { open } from 'sqlite'
+// import { open } from 'sqlite'
+import { createPool } from 'mysql2/promise'
 import { Server } from 'http'
 
 const config = new Config('./config.json')
-consola.info(`Reading database ${config.dbpath}`)
-const db = await open({
-  filename: config.dbpath,
-  driver: sqlite3.Database
+consola.info(`Connecting database ${config.dbhost}`)
+const db = await createPool({
+  host: config.dbhost,
+  user: config.dbuser,
+  password: config.dbpass,
+  database: config.db
 })
 const app = express()
 app.set('view engine', 'ejs')
@@ -31,7 +34,7 @@ const server = app.listen(config.port, () => { consola.info(`Server started at h
 function shutdown (server:Server) {
   server.close(async () => {
     consola.info('Shuting down')
-    await db.close()
+    await db.end()
     consola.info('Closing database')
   })
 }
