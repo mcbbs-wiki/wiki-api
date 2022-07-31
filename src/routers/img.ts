@@ -11,7 +11,7 @@ const SQL = 'select * from imgs where id=?;'
 const USAGE_SQL = 'INSERT INTO usages VALUES (NULL,"img",?,?,?,?,?,?);'
 let imgnum:number
 
-function usage (random:boolean, pid:number, status:number, ip:string, ua:string, extra:string) {
+function usage (random:boolean, pid:number, status:number, ip:string, ua:string, extra:string | null) {
   db.execute(USAGE_SQL, [random ? 0 : pid, status, ip, ua, new Date(), extra])
 }
 routerImg.get('/imgs', async (req, res) => {
@@ -42,11 +42,11 @@ async function queryImg (id:string, req:Request, res:Response, random:boolean) {
         res.send('')
       }
     } else {
-      usage(random, pid, 200, req.ip, ua, '')
+      usage(random, pid, 200, req.ip, ua, null)
       res.redirect(`/images/memes/${pid}.webp`)
     }
   } else {
-    usage(random, pid, 400, req.ip, ua, '')
+    usage(random, pid, 400, req.ip, ua, null)
     res.status(400)
     res.send('')
   }
