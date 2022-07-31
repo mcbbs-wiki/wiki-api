@@ -5,14 +5,18 @@
   "main": "index.js",
   "type": "module",
   "author": "",
+  "scripts": {
+    "serve": "cross-env NODE_ENV=development nodemon --config nodemon.json dist/bundle.js",
+    "build": "cross-env NODE_ENV=production node esbuild.config.js"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.13",
     "@types/is-number": "^7.0.3",
-    "@types/sqlite3": "^3.1.8",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "compressing": "^1.6.2",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.14.51",
     "esbuild-node-externals": "^1.4.1",
     "eslint": "^8.20.0",
@@ -20,8 +24,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-promise": "^6.0.0",
-    "ts-node": "^10.9.1",
-    "ts-node-dev": "^2.0.0",
+    "nodemon": "^2.0.19",
     "typescript": "^4.7.4"
   },
   "dependencies": {

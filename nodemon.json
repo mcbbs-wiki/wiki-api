@@ -1,0 +1,9 @@
+{
+    "ext":"ts",
+    "events":{
+        "restart":"node esbuild.config.js"
+    },
+    "watch":[
+        "src/**/*"
+    ]
+}
