@@ -22,6 +22,9 @@ app.set('view engine', 'ejs')
 app.use(await img(db))
 app.use(user(db))
 // app.use(admin)
+app.get('/', (req, res) => {
+  res.send({ status: 'OK', document: 'https://mcbbs.wiki/wiki/MCBBS_Wiki:API' })
+})
 app.get('/crash-test', (req, res) => {
   throw new Error('test')
 })
