@@ -3,7 +3,7 @@ import { nodeExternalsPlugin } from 'esbuild-node-externals'
 import { tgz } from 'compressing'
 import { createWriteStream } from 'fs'
 console.info('Bundling...')
-build({
+await build({
   entryPoints: ['./src/index.ts'],
   bundle: true,
   outfile: 'dist/bundle.js',
