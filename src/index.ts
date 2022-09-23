@@ -30,7 +30,7 @@ app.get('/crash-test', (req, res) => {
   throw new Error('test')
 })
 app.all('*', (req, res) => {
-  res.status(404).sendFile('/www/wwwroot/mcbbs.wiki/404.html')
+  res.status(404).send(new createError.NotFound('Route Not Found.'))
 })
 app.use((err:any, req:any, res:any, next:any) => {
   console.error(err)
