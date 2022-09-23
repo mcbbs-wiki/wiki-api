@@ -2,6 +2,7 @@ import express, { Router } from 'express'
 import isNumber from 'is-number'
 // import { Database } from 'sqlite'
 import { getUser } from '../crawler.js'
+import createError from 'http-errors'
 const routerUser = express.Router()
 routerUser.get('/users/:id', async (req, res) => {
   res.header('Access-Control-Allow-Origin', '*')
@@ -15,10 +16,10 @@ routerUser.get('/users/:id', async (req, res) => {
       // console.log(uid, req.ip, ua)
       res.send(user)
     } else {
-      res.status(404).sendFile('/www/wwwroot/mcbbs.wiki/404.html')
+      res.status(404).send(new createError.NotFound('User Not Found.'))
     }
   } else {
-    res.status(400).sendFile('/www/wwwroot/mcbbs.wiki/400.html')
+    res.status(400).send(new createError.BadRequest('Request params error. See https://mcbbs.wiki/wiki/MCBBS_Wiki:API for help.'))
   }
 })
 export default function ():Router {

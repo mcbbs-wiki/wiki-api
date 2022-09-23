@@ -7,6 +7,7 @@ import user from './routers/user.js'
 // import { open } from 'sqlite'
 import { createPool } from 'mysql2/promise'
 import { Server } from 'http'
+import createError from 'http-errors'
 
 const config = new Config('./config.json')
 console.info(`Connecting database ${config.dbhost}`)
@@ -33,7 +34,7 @@ app.all('*', (req, res) => {
 })
 app.use((err:any, req:any, res:any, next:any) => {
   console.error(err)
-  res.status(500).sendFile('/www/wwwroot/mcbbs.wiki/500.html')
+  res.status(500).send(new createError.InternalServerError())
 })
 const server = app.listen(config.port, () => { console.info(`Server started at http://0.0.0.0:${config.port}`) })
 function shutdown (server:Server) {

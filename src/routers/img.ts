@@ -3,6 +3,7 @@ import isNumber from 'is-number'
 import randomInteger from 'random-int'
 // import consola from 'consola'
 import { Pool, RowDataPacket } from 'mysql2/promise'
+import createError from 'http-errors'
 
 let db:Pool
 const routerImg = express.Router()
@@ -45,10 +46,10 @@ routerImg.get('/imgs/:id', async (req, res) => {
         res.redirect(img[0].path)
       }
     } else {
-      res.status(404).sendFile('/www/wwwroot/mcbbs.wiki/404.html')
+      res.status(404).send(new createError.NotFound('Image Not Found.'))
     }
   } else {
-    res.status(400).sendFile('/www/wwwroot/mcbbs.wiki/400.html')
+    res.status(400).send(new createError.BadRequest('Request params error.See https://mcbbs.wiki/wiki/MCBBS_Wiki:API for help.'))
   }
 })
 routerImg.post('/imgs/upload', (req, res) => {
