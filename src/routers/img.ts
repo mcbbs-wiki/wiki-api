@@ -58,7 +58,7 @@ routerImg.post('/imgs/upload', (req, res) => {
 routerImg.get('/imgs/list', (req, res) => {
 
 })
-export default async function (conn:Pool):Promise<Router> {
+export default function (conn:Pool):Router {
   db = conn
   // const [res] = await db.query('select count(*) as count from imgs;')
   // imgnum = (await db.query('select count(*) as count from imgs;')).count
